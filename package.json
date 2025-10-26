@@ -9,6 +9,7 @@
     "type": "git",
     "url": "git+https://github.com/Dasberg-Innovations/Tasmit---Task-Management-Application.git"
   },
+  "type": "module",
   "keywords": [],
   "author": "",
   "license": "ISC",

@@ -1,5 +1,5 @@
 import express from 'express';
-import { User } from '../Models/UserLoginModel.js';
+import { User } from '../Models/UserLoginModel';
 import bcrypt from 'bcrypt'; // Encryption for Password
 
 const router = express.Router();

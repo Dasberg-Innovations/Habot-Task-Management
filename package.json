@@ -7,15 +7,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/BabyBlob/Tasmit--Task-Management-Web-App.git"
+    "url": "git+https://github.com/Dasberg-Innovations/Tasmit---Task-Management-Application.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/BabyBlob/Tasmit--Task-Management-Web-App/issues"
+    "url": "https://github.com/Dasberg-Innovations/Tasmit---Task-Management-Application/issues"
   },
-  "homepage": "https://github.com/BabyBlob/Tasmit--Task-Management-Web-App#readme",
+  "homepage": "https://github.com/Dasberg-Innovations/Tasmit---Task-Management-Application#readme",
   "description": "",
   "dependencies": {
     "dotenv": "^17.2.3",

@@ -1,7 +1,7 @@
 import express from 'express'
 import { PORT, MongoDbUrl } from './config.js';
 import mongoose, { mongo } from 'mongoose';
-import { User } from './Models/UserLoginModel.js';
+import loginRoute from './Routes/loginRoute.js';
 
 const app = express();
 
@@ -10,6 +10,7 @@ app.get('/', (request, response) =>{
     return response.status(234).send('Testing')
 });
 
+app.use('/', loginRoute);
 
 mongoose
     .connect(MongoDbUrl)

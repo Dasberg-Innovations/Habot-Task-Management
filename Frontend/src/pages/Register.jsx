@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { signupUser } from '../../../Backend/Controllers/LoginController'; 
+import DesktopImage from '../../src/assets/Landing_Page.jpg';
 
 function Register() {
   const [username, setUsername] = useState('');
@@ -24,7 +25,7 @@ function Register() {
 
   return (
     <div className="flex h-screen">
-      <div className="flex-1 bg-cover bg-center" style={{ backgroundImage: "url('/path/to/your/image.jpg')" }} />
+      <div className="flex-1 bg-cover bg-center" style={{ backgroundImage: `url(${DesktopImage})` }} />
       
       <div className="flex items-center justify-center flex-col w-full max-w-md p-8 bg-white shadow-md">
         <h2 className="mb-4 text-2xl font-bold text-center">Register</h2>

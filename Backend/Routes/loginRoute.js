@@ -50,20 +50,22 @@ router.post("/login", async (request, response) => {
     try {
         const { username, email, password } = request.body;
 
-        if (!username && !email || !password) {
+        if ((!username && !email) || !password) {
             return response.status(400).json({ error: "Username or email and password are required" });
         } 
 
         const user = await User.findOne({
-            $or: [{ username: username }, { email: email }]
+            $or: [{ username }, { email }]
         });
 
         if (!user) {
+            console.log("User not found");
             return response.status(401).json({ error: "Invalid credentials" });
         }
 
         const isPasswordValid = await bcrypt.compare(password, user.password);
         if (!isPasswordValid) {
+            console.log("Invalid password");
             return response.status(401).json({ error: "Invalid credentials" });
         }
 

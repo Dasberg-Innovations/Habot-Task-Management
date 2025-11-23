@@ -4,12 +4,14 @@ import bcrypt from 'bcrypt'; // Encryption for Password
 
 const router = express.Router();
 
+router.use(express.json());
+
 router.post("/signup", async (request, response) => {
     try {
         const { username, email, password } = request.body;
 
-        if (!username && !email) {
-            return response.status(400).json({ error: "Username or Email is required to signup." });
+        if (!username || !email) {
+            return response.status(400).json({ error: "Username and Email are required to signup." });
         }
         if (!password) {
             return response.status(400).json({ error: "Password is required" });
@@ -36,8 +38,7 @@ router.post("/signup", async (request, response) => {
             message: "User created successfully",
             user: {
                 username: newUser.username,
-                email: newUser.email,
-                role: newUser.role
+                email: newUser.email
             }
         });
     } catch (error) {
@@ -48,24 +49,22 @@ router.post("/signup", async (request, response) => {
 
 router.post("/login", async (request, response) => {
     try {
-        const { username, email, password } = request.body;
+        const { username, password } = request.body;
 
-        if ((!username && !email) || !password) {
-            return response.status(400).json({ error: "Username or email and password are required" });
+        if (!username || !password) {
+            return response.status(400).json({ error: "Username and password are required" });
         } 
 
         const user = await User.findOne({
-            $or: [{ username }, { email }]
+            $or: [{ username }, { email: username }] // Allow login with username or email
         });
 
         if (!user) {
-            console.log("User not found");
             return response.status(401).json({ error: "Invalid credentials" });
         }
 
         const isPasswordValid = await bcrypt.compare(password, user.password);
         if (!isPasswordValid) {
-            console.log("Invalid password");
             return response.status(401).json({ error: "Invalid credentials" });
         }
 
@@ -73,7 +72,7 @@ router.post("/login", async (request, response) => {
             message: "Login successful",
             user: {
                 username: user.username,
-                role: user.role
+                email: user.email
             }
         });
     } catch (error) {

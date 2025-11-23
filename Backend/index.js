@@ -5,7 +5,9 @@ import loginRoute from './Routes/loginRoute.js';
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
+
 
 app.get('/', (request, response) => {
     return response.status(200).send('Testing');

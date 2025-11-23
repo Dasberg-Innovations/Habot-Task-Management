@@ -23,10 +23,12 @@ function Login() {
 
   return (
     <div className="flex h-screen">
-      <div className="flex-1 bg-cover bg-center" style={{ backgroundImage: "url('/path/to/your/image.jpg')" }} />
-      
-      <div className="flex items-center justify-center flex-col w-full max-w-md p-8 bg-white shadow-md">
-        <h2 className="mb-4 text-2xl font-bold text-center">Login</h2>
+      <div 
+        className="w-3/5 bg-cover bg-center" 
+        style={{ backgroundImage: "url('/path/to/your/image.jpg')" }} 
+      />
+      <div className="w-2/5 flex items-center justify-center flex-col p-8" style={{ backgroundColor: '#312f2f' }}>
+        <h2 className="mb-4 text-2xl font-bold text-white text-center">Login</h2>
       
         {error && <p className="mb-4 text-red-500 text-center">{error}</p>}
 
@@ -50,15 +52,15 @@ function Login() {
           
           <button 
             type="submit" 
-            className="p-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+            className="p-2 bg-blue-600 text-white rounded hover:bg-blue-700"
           >
             Login
           </button>
         </form>
 
-        <p className="mt-4 text-center">
+        <p className="mt-4 text-center text-white">
           Don't have an account?{" "}
-          <Link to="/register" className="text-blue-500 hover:underline">Register</Link>
+          <Link to="/register" className="underline">Register</Link>
         </p>
       </div>
     </div>

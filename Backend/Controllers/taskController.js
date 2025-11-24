@@ -55,3 +55,14 @@ const updateTask = async (req, res) => {
         res.status(400).json({ message: err.message });
     }
 };
+
+const deleteTask = async (req, res) => {
+    try {
+        await res.task.deleteOne();
+        res.json({ message: 'Task deleted' });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
+
+export { getAllTasks, createTask, getTask, updateTask, deleteTask };

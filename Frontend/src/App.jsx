@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import Login from "./pages/Login";
@@ -9,23 +9,36 @@ import Settings from "./pages/Settings";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const location = useLocation();
 
   const handleLogin = () => {
     setIsLoggedIn(true);
   };
 
+  const isAuthPage = location.pathname === "/login" || location.pathname === "/register";
+
   return (
-    <Router>
+    <div className="flex flex-col h-screen">
       <Header />
-      {isLoggedIn && <Sidebar />}
-      <Routes>
-        <Route path="/login" element={<Login onLogin={handleLogin} />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/hero" element={<HeroPage />} />
-        <Route path="/settings" element={<Settings />} />
-      </Routes>
-    </Router>
+      <div className="flex flex-1">
+        {!isAuthPage && <Sidebar isLoggedIn={isLoggedIn} />}
+        <main className="flex-1 p-5">
+          <Routes>
+            <Route path="/login" element={<Login onLogin={handleLogin} />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/hero" element={<HeroPage />} />
+            <Route path="/settings" element={<Settings />} />
+          </Routes>
+        </main>
+      </div>
+    </div>
   );
 };
 
-export default App;
+const Main = () => (
+  <Router>
+    <App />
+  </Router>
+);
+
+export default Main;

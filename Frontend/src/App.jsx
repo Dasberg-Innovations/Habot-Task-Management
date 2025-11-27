@@ -36,7 +36,7 @@ const AppContent = () => {
   const { user, loading } = useAuth();
   const location = useLocation();
 
-  const isAuthPage = location.pathname === "/login" || location.pathname === "/register";
+  const isAuthPage = location.pathname === "/login" || location.pathname === "/register" || location.pathname === "/forgot-password";
 
   if (loading) {
     return (

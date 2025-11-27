@@ -5,6 +5,8 @@ import { PORT, MongoDbUrl } from './config.js';
 import loginRoute from './Routes/loginRoute.js';
 import taskRoutes from './Routes/taskRoute.js';
 import GoalRoute from './Routes/GoalRoute.js';
+import SettingsRoute from './Routes/SettingsRoute.js';
+
 const app = express();
 
 app.use(cors());
@@ -19,6 +21,7 @@ app.get('/', (request, response) => {
 app.use('/', loginRoute);
 app.use('/tasks', taskRoutes);
 app.use('/goals', GoalRoute);
+app.use('/settings', SettingsRoute);
 
 
 mongoose

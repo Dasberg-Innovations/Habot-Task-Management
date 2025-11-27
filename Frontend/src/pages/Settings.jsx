@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { useAuth } from "../components/AuthContext";
 
 function Settings() {
+  const { user } = useAuth();
   const [currentTheme, setCurrentTheme] = useState("default");
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
 
   const themes = {
     default: {
@@ -54,12 +58,61 @@ function Settings() {
     }
   };
 
-  useEffect(() => {
-    const savedTheme = localStorage.getItem('theme') || 'default';
+  const fetchUserSettings = async () => {
+    if (!user) return;
     
-    setCurrentTheme(savedTheme);
-    applyTheme(savedTheme);
-  }, []);
+    try {
+      const response = await fetch(`http://localhost:5555/settings/${user.id}`);
+      if (response.ok) {
+        const settings = await response.json();
+        if (settings.theme) {
+          setCurrentTheme(settings.theme);
+          applyTheme(settings.theme);
+          localStorage.setItem('theme', settings.theme);
+        }
+      }
+    } catch (error) {
+      console.error('Error fetching settings:', error);
+      const savedTheme = localStorage.getItem('theme') || 'default';
+      setCurrentTheme(savedTheme);
+      applyTheme(savedTheme);
+    }
+  };
+  const saveSettingsToDatabase = async (themeName) => {
+    if (!user) return;
+    
+    setLoading(true);
+    try {
+      const response = await fetch('http://localhost:5555/settings', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          userId: user.id,
+          theme: themeName
+        }),
+      });
+
+      if (response.ok) {
+        setMessage('Settings saved successfully!');
+        setTimeout(() => setMessage(''), 3000);
+      } else {
+        throw new Error('Failed to save settings');
+      }
+    } catch (error) {
+      console.error('Error saving settings:', error);
+      setMessage('Error saving settings. Using local storage.');
+      setTimeout(() => setMessage(''), 3000);
+      localStorage.setItem('theme', themeName);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchUserSettings();
+  }, [user]);
 
   const applyTheme = (themeName) => {
     const theme = themes[themeName];
@@ -72,10 +125,10 @@ function Settings() {
     document.documentElement.setAttribute('data-theme', themeName);
   };
 
-  const handleThemeChange = (themeName) => {
+  const handleThemeChange = async (themeName) => {
     setCurrentTheme(themeName);
-    localStorage.setItem('theme', themeName);
     applyTheme(themeName);
+    await saveSettingsToDatabase(themeName);
   };
 
   return (
@@ -83,22 +136,33 @@ function Settings() {
       <div className="w-full max-w-2xl">
         <h2 className="text-xl font-semibold mb-6 text-center">Settings</h2>
         
+        {message && (
+          <div className={`mb-4 p-3 rounded text-center ${
+            message.includes('Error') 
+              ? 'bg-red-100 text-red-700 border border-red-300' 
+              : 'bg-green-100 text-green-700 border border-green-300'
+          }`}>
+            {message}
+          </div>
+        )}
+        
         <div className="space-y-6">
           <div className="bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 p-4">
             <h3 className="font-medium mb-3">Theme</h3>
             <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-              Choose your color theme
+              Choose your color theme {loading && "(Saving...)"}
             </p>
             
             <div className="grid grid-cols-4 gap-3">
               {Object.entries(themes).map(([key, theme]) => (
                 <button
                   key={key}
+                  disabled={loading}
                   className={`flex flex-col items-center p-3 rounded border-2 transition-colors ${
                     currentTheme === key 
                       ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20' 
                       : 'border-gray-200 dark:border-gray-600 hover:border-gray-300'
-                  }`}
+                  } ${loading ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
                   onClick={() => handleThemeChange(key)}
                 >
                   <div 
@@ -126,6 +190,37 @@ function Settings() {
                   <input type="checkbox" className="sr-only peer" defaultChecked />
                   <div className="w-12 h-6 bg-gray-300 peer-focus:ring-0 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-7 peer-checked:bg-blue-500 after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
                 </label>
+              </div>
+              
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="font-medium">Email Updates</p>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                    Weekly progress reports
+                  </p>
+                </div>
+                <label className="relative inline-flex items-center cursor-pointer">
+                  <input type="checkbox" className="sr-only peer" />
+                  <div className="w-12 h-6 bg-gray-300 peer-focus:ring-0 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-7 peer-checked:bg-blue-500 after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 p-4">
+            <h3 className="font-medium mb-3">Account Information</h3>
+            <div className="space-y-2 text-sm">
+              <div className="flex justify-between">
+                <span className="text-gray-600 dark:text-gray-400">Username:</span>
+                <span className="font-medium">{user?.username}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-gray-600 dark:text-gray-400">Email:</span>
+                <span className="font-medium">{user?.email}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-gray-600 dark:text-gray-400">User ID:</span>
+                <span className="font-medium text-xs">{user?.id}</span>
               </div>
             </div>
           </div>

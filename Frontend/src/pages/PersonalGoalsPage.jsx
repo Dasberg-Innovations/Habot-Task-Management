@@ -164,17 +164,29 @@ const PersonalGoalsPage = () => {
 
     return (
         <div className="flex flex-col min-h-screen p-4">
-            <button 
-                onClick={() => setIsModalOpen(true)} 
-                className="mb-4 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md transition-colors disabled:opacity-50"
-                disabled={loading}
-            >
-                {loading ? 'Adding...' : 'Add Goal'}
-            </button>
+            <div className="flex justify-between items-center mb-6">
+                <h1 className="text-2xl font-bold text-gray-800">Your Active Goals</h1>
+                <button 
+                    onClick={() => setIsModalOpen(true)} 
+                    className="flex items-center justify-center w-10 h-10 bg-blue-500 hover:bg-blue-600 text-white rounded-lg shadow-md transition-all duration-200 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                    disabled={loading}
+                    title="Add New Goal"
+                >
+                    {loading ? (
+                        <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                    ) : (
+                        <MdAdd size={24} />
+                    )}
+                </button>
+            </div>
 
             <div className="flex flex-col space-y-4 w-full">
                 {goals.length === 0 ? (
-                    <div className="text-center text-gray-500 py-8">No goals yet. Add your first goal!</div>
+                    <div className="text-center text-gray-500 py-8 border-2 border-dashed border-gray-300 rounded-lg">
+                        <MdAdd className="mx-auto mb-3 text-gray-400" size={48} />
+                        <p className="text-lg font-medium mb-2">No goals yet</p>
+                        <p className="text-sm">Click the <span className="font-semibold">+</span> button above to add your first goal!</p>
+                    </div>
                 ) : (
                     goals.map(goal => {
                         const progress = calculateProgress(goal);

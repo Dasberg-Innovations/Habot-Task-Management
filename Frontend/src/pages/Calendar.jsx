@@ -97,10 +97,10 @@ const Calendar = () => {
           </div>
         </div>
 
-        <div className="border border-gray-200 rounded">
-          <div className="grid grid-cols-7 bg-gray-50 border-b border-gray-200">
+        <div className="border border-gray-20 rounded">
+          <div className="grid grid-cols-7 bg-sky-600 border-b border-gray-200">
             {dayNames.map(day => (
-              <div key={day} className="text-center py-2 text-sm text-gray-600 font-medium">
+              <div key={day} className="text-center py-2 text-sm text-white font-medium">
                 {day}
               </div>
             ))}
@@ -112,7 +112,7 @@ const Calendar = () => {
               return (
                 <div
                   key={index}
-                  className={`min-h-24 p-2 border-r border-b border-gray-200 ${day.isCurrentMonth ? 'bg-white' : 'bg-gray-50'} ${isToday(day.date) ? 'bg-blue-50' : ''} ${isSelected ? 'ring-1 ring-blue-500' : ''} hover:bg-gray-50 cursor-pointer`}
+                  className={`min-h-24 p-2 border-r border-b border-gray-200 ${day.isCurrentMonth ? 'bg-white' : 'bg-gray-50'} ${isToday(day.date) ? 'bg-blue-50' : ''} ${isSelected ? 'ring-1 ring-blue-600' : ''} hover:bg-gray-50 cursor-pointer`}
                   onClick={() => setSelectedDay(day.date)}
                 >
                   <div className={`text-sm mb-1 ${day.isCurrentMonth ? 'text-gray-900' : 'text-gray-400'} ${isToday(day.date) ? 'text-blue-600 font-medium' : ''}`}>
@@ -133,7 +133,7 @@ const Calendar = () => {
         </div>
 
         {selectedDay && (
-          <div className="mt-6 border border-gray-200 rounded p-4">
+          <div className="mt-6 border bg-white border-gray-200 rounded p-4">
             <h3 className="text-lg font-normal text-gray-900 mb-3">
               {selectedDay.toLocaleDateString('en-US', { 
                 weekday: 'long', 
@@ -142,7 +142,7 @@ const Calendar = () => {
                 day: 'numeric' 
               })}
             </h3>
-            <div className="space-y-2">
+            <div className="space-y-2 bg-blue-400">
               {getTasksForDay(new Date(selectedDay)).length === 0 ? (
                 <p className="text-gray-500 text-center py-2">No tasks</p>
               ) : (

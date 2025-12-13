@@ -179,22 +179,34 @@ const TaskManager = () => {
 
     return (
         <div className="flex flex-col min-h-screen p-4">
-            <button 
-                onClick={() => setIsModalOpen(true)} 
-                className="mb-4 bg-green-600 hover:bg-blue-600 text-white px-4 py-2 rounded-md transition-colors disabled:opacity-50"
-                disabled={loading}
-            >
-                {loading ? 'Adding...' : 'Add Task'}
-            </button>
+            <div className="flex justify-between items-center mb-6">
+                <h1 className="text-2xl font-bold text-gray-800">Your Current Tasks</h1>
+                <button 
+                    onClick={() => setIsModalOpen(true)} 
+                    className="flex items-center justify-center w-10 h-10 bg-blue-500 hover:bg-blue-600 text-white rounded-lg shadow-md transition-all duration-200 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                    disabled={loading}
+                    title="Add New Task"
+                >
+                    {loading ? (
+                        <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                    ) : (
+                        <MdAdd size={24} />
+                    )}
+                </button>
+            </div>
 
             <div className="flex flex-col space-y-4 w-full">
                 {tasks.length === 0 ? (
-                    <div className="text-center text-gray-500 py-8">No tasks yet. Add your first task!</div>
+                    <div className="text-center text-gray-500 py-8 border-2 border-dashed border-gray-300 rounded-lg">
+                        <MdAdd className="mx-auto mb-3 text-gray-400" size={48} />
+                        <p className="text-lg font-medium mb-2">No tasks yet</p>
+                        <p className="text-sm">Click the <span className="font-semibold">+</span> button above to add your first task!</p>
+                    </div>
                 ) : (
                     tasks.map(task => {
                         const progress = calculateProgress(task);
                         return (
-                            <div key={task._id} className="flex flex-col bg-white rounded-lg shadow-md p-4 w-full">
+                            <div key={task._id} className="flex flex-col bg-white border-2 border-gray-300 rounded-lg shadow-md p-4 w-full">
                                 <div className="flex items-center justify-between">
                                     <div className="flex flex-col flex-1">
                                         <div className="flex items-center gap-2">
@@ -214,12 +226,12 @@ const TaskManager = () => {
                                             >
                                                 {task.Task_Completed && <MdOutlineDone className="text-white" size={14} />}
                                             </button>
-                                            <span className={`text-lg font-semibold ${task.Task_Completed ? 'line-through text-gray-400' : 'text-gray-800'}`}>
+                                            <span className={`text-lg font-semibold ${task.Task_Completed ? 'line-through text-gray-400' : 'text-black'}`}>
                                                 {task.Task_Title}
                                             </span>
                                         </div>
-                                        <span className="text-sm text-gray-600 mt-1 ml-7">{task.Description}</span>
-                                        <div className="text-xs text-gray-500 mt-1 ml-7">
+                                        <span className="text-sm text-gray-900 mt-1 ml-7">{task.Description}</span>
+                                        <div className="text-xs text-gray-900 mt-2 ml-7">
                                             Priority: {task.Priority} | Urgency: {task.Urgency} | Due: {new Date(task.Due_Date).toLocaleDateString()}
                                         </div>
                                         

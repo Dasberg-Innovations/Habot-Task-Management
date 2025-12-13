@@ -75,7 +75,7 @@ export default function HeroPage() {
   if (loading) {
     return (
       <div className="flex h-screen bg-gradient-to-br from-[#1e1e2f] to-[#2e2e4f] text-white font-sans p-10 gap-10 md:flex-row md:p-5 items-center justify-center">
-        <div className="text-xl">Loading your dashboard...</div>
+        <div className="text-xl">Loading the Dashboard, Please Wait.</div>
       </div>
     );
   }
@@ -105,7 +105,7 @@ export default function HeroPage() {
           <h2 className="text-2xl font-bold mb-4 text-white">Your Goals Progress</h2>
           {!goals.length ? (
             <div className="text-center text-gray-400 py-4">
-              No goals yet. Create some goals to see your progress!
+              Want to see your progress? Head to the Goals Tab and Create a Goal.
             </div>
           ) : (
             <div className="space-y-4">
@@ -117,19 +117,19 @@ export default function HeroPage() {
                 return (
                   <div key={goal._id} className="bg-white bg-opacity-10 rounded-lg p-4">
                     <div className="flex justify-between items-center mb-2">
-                      <h3 className="font-semibold text-gray-200 truncate">{goal.Goal_Aim}</h3>
-                      <span className="text-sm text-gray-300 bg-black bg-opacity-30 px-2 py-1 rounded">
+                      <h3 className="font-semibold text-gray-900 truncate">{goal.Goal_Aim}</h3>
+                      <span className="text-sm text-black px-2 py-1 rounded">
                         {Math.round(progress)}%
                       </span>
                     </div>
-                    <p className="text-sm text-gray-400 mb-3 truncate">{goal.Description}</p>
+                    <p className="text-sm text-gray-800 mb-3 truncate">{goal.Description}</p>
                     <div className="w-full bg-gray-700 rounded-full h-2">
                       <div 
                         className="bg-gradient-to-r from-green-400 to-blue-500 h-2 rounded-full transition-all duration-500"
                         style={{ width: `${progress}%` }}
                       ></div>
                     </div>
-                    <div className="flex justify-between text-xs text-gray-400 mt-1">
+                    <div className="flex justify-between text-xs text-gray-800 mt-1">
                       <span>{completedSubgoals}/{totalSubgoals} Sub Goals</span>
                       <span>{goal.Goal_Completed ? "Completed" : "In Progress"}</span>
                     </div>
@@ -170,17 +170,16 @@ export default function HeroPage() {
                           isOverdue ? 'bg-red-400' : 'bg-yellow-400'
                         }`}></div>
                         <div>
-                          <div className={`font-medium ${task.Task_Completed ? 'line-through text-gray-400' : 'text-white'}`}>
+                          <div className={`font-medium ${task.Task_Completed ? 'line-through text-gray-400' : 'text-gray-900'}`}>
                             {task.Task_Title}
                           </div>
-                          <div className="text-xs text-gray-400">
+                          <div className="text-xs text-gray-800">
                             Due: {new Date(task.Due_Date).toLocaleDateString()} | 
                             Status: {getTaskStatus(task)}
                           </div>
                         </div>
                       </div>
                       <div className="flex items-center gap-2">
-                        <span className="text-xs text-gray-300">{Math.round(progress)}%</span>
                         <div className={`text-xs px-2 py-1 rounded-full ${
                           task.Priority === 'High' ? 'bg-red-500' :
                           task.Priority === 'Medium' ? 'bg-yellow-500' : 'bg-green-500'
@@ -192,7 +191,7 @@ export default function HeroPage() {
                     
                     {/* Subtask Progress */}
                     <div className="mt-2">
-                      <div className="flex justify-between text-xs text-gray-400 mb-1">
+                      <div className="flex justify-between text-xs text-gray-800 mb-1">
                         <span>{task.SubTasks ? `${completedSubtasks}/${totalSubtasks} subtasks` : 'No subtasks'}</span>
                         <span>{Math.round(progress)}%</span>
                       </div>
@@ -213,18 +212,18 @@ export default function HeroPage() {
                         {task.SubTasks.slice(0, 2).map((subtask) => (
                           <div key={subtask._id} className="flex items-center justify-between text-xs">
                             <div className="flex items-center gap-2">
-                              <div className={`w-2 h-2 rounded-full ${subtask.completed ? 'bg-green-400' : 'bg-gray-500'}`}></div>
-                              <span className={`${subtask.completed ? 'line-through text-gray-400' : 'text-gray-300'}`}>
+                              <div className={`w-2 h-2 rounded-full ${subtask.completed ? 'bg-green-500' : 'bg-gray-500'}`}></div>
+                              <span className={`${subtask.completed ? ' text-gray-700' : 'text-gray-300'}`}>
                                 {subtask.title}
                               </span>
                             </div>
-                            <span className={`text-xs ${subtask.completed ? 'text-green-400' : 'text-gray-400'}`}>
+                            <span className={`text-xs ${subtask.completed ? 'text-green-500' : 'text-gray-400'}`}>
                               {subtask.completed ? 'Done' : 'Pending'}
                             </span>
                           </div>
                         ))}
                         {task.SubTasks.length > 2 && (
-                          <div className="text-xs text-gray-400 text-center">
+                          <div className="text-xs text-gray-700 text-center">
                             +{task.SubTasks.length - 2} more subtasks
                           </div>
                         )}

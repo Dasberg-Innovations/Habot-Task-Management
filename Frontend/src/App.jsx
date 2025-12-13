@@ -16,7 +16,7 @@ const ProtectedRoute = ({ children }) => {
   const { user, loading } = useAuth();
 
   if (loading) {
-    return <div className="flex justify-center items-center h-screen">Loading...</div>;
+    return <div className="flex justify-center items-center h-screen">Loading</div>;
   }
 
   return user ? children : <Navigate to="/login" replace />;
@@ -26,7 +26,7 @@ const PublicRoute = ({ children }) => {
   const { user, loading } = useAuth();
 
   if (loading) {
-    return <div className="flex justify-center items-center h-screen">Loading...</div>;
+    return <div className="flex justify-center items-center h-screen">Loading</div>;
   }
 
   return user ? <Navigate to="/hero" replace /> : children;
@@ -47,11 +47,11 @@ const AppContent = () => {
   }
 
   return (
-    <div className="flex flex-col h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+    <div className="flex flex-col h-screen from-gray-50 to-gray-100">
       {!isAuthPage && <Header />}
       <div className="flex flex-1">
         {!isAuthPage && <Sidebar />}
-        <main className="flex-1 p-5 overflow-y-auto">
+        <main className="flex-1 overflow-y-auto">
           <Routes>
             <Route
               path="/login"

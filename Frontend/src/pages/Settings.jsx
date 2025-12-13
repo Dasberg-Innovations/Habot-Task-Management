@@ -174,39 +174,6 @@ function Settings() {
               ))}
             </div>
           </div>
-
-          <div className="bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 p-4">
-            <h3 className="font-medium mb-4">Preferences</h3>
-            
-            <div className="space-y-4">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="font-medium">Notifications</p>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">
-                    Task and goal reminders
-                  </p>
-                </div>
-                <label className="relative inline-flex items-center cursor-pointer">
-                  <input type="checkbox" className="sr-only peer" defaultChecked />
-                  <div className="w-12 h-6 bg-gray-300 peer-focus:ring-0 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-7 peer-checked:bg-blue-500 after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
-                </label>
-              </div>
-              
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="font-medium">Email Updates</p>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">
-                    Weekly progress reports
-                  </p>
-                </div>
-                <label className="relative inline-flex items-center cursor-pointer">
-                  <input type="checkbox" className="sr-only peer" />
-                  <div className="w-12 h-6 bg-gray-300 peer-focus:ring-0 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-7 peer-checked:bg-blue-500 after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
-                </label>
-              </div>
-            </div>
-          </div>
-
           <div className="bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 p-4">
             <h3 className="font-medium mb-3">Account Information</h3>
             <div className="space-y-2 text-sm">

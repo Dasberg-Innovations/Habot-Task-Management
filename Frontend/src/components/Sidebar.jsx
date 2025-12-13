@@ -28,10 +28,6 @@ const Sidebar = () => {
           className={`flex items-center gap-2 p-2 rounded-full text-gray-800 hover:bg-blue-200 ${path === "calendar" ? "bg-blue-700 text-white" : ""}`}
         >Calendar</Link>
         <Link
-          to="account"
-          className={`flex items-center gap-2 p-2 rounded-full text-gray-800 hover:bg-blue-200 ${path === "account" ? "bg-blue-700 text-white" : ""}`}
-        >Account</Link>
-        <Link
           to="settings"
           className={`flex items-center gap-2 p-2 rounded-full text-gray-800 hover:bg-blue-200 ${path === "settings" ? "bg-blue-700 text-white" : ""}`}
         >Settings</Link>

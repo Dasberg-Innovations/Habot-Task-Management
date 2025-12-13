@@ -1,6 +1,10 @@
 @import "tailwindcss";
 
 :root {
+  --primary-color: #3b82f6;
+  --background-color: #f8fafc;
+  --text-color: #1e293b;
+  
   --primary-50: #f0f9ff;
   --primary-100: #e0f2fe;
   --primary-200: #bae6fd;
@@ -55,6 +59,48 @@
   --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 }
 
+[data-theme="default"] {
+  --primary-color: #3b82f6;
+  --background-color: #f8fafc;
+  --text-color: #1e293b;
+}
+
+[data-theme="dustyLavender"] {
+  --primary-color: #a78bfa;
+  --background-color: #fafafa;
+  --text-color: #4c1d95;
+}
+
+[data-theme="purple"] {
+  --primary-color: #8b5cf6;
+  --background-color: #f5f3ff;
+  --text-color: #4c1d95;
+}
+
+[data-theme="blue"] {
+  --primary-color: #06b6d4;
+  --background-color: #ecfeff;
+  --text-color: #164e63;
+}
+
+[data-theme="green"] {
+  --primary-color: #10b981;
+  --background-color: #ecfdf5;
+  --text-color: #064e3b;
+}
+
+[data-theme="orange"] {
+  --primary-color: #f97316;
+  --background-color: #fff7ed;
+  --text-color: #7c2d12;
+}
+
+[data-theme="pink"] {
+  --primary-color: #ec4899;
+  --background-color: #fdf2f8;
+  --text-color: #831843;
+}
+
 [data-theme="dark"] {
   --bg-primary: var(--neutral-900);
   --bg-secondary: var(--neutral-800);
@@ -66,4 +112,9 @@
   
   --border-light: var(--neutral-700);
   --border-medium: var(--neutral-600);
+  
+  --primary-color: #6b7280;
+  --background-color: #111827;
+  --text-color: #f9fafb;
 }
+

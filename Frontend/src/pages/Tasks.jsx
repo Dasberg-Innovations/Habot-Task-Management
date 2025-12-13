@@ -449,7 +449,7 @@ const TaskManager = () => {
                 </div>
             )}
 
-            {/* Edit Task Modal */}
+            {/* Edit Task Model */}
             {editing_task && (
                 <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
                     <div className="bg-white rounded-lg shadow-lg p-6 w-96 max-w-full mx-4">

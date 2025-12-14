@@ -9,10 +9,9 @@ import SettingsRoute from './Routes/SettingsRoute.js';
 
 const app = express();
 
-app.use(cors({
-  origin: ['https://habotapp-task-manager.onrender.com', 'http://localhost:5173'], 
-  credentials: true
-}));
+app.use(cors());
+
+app.use(express.json());
 
 
 app.get('/', (request, response) => {

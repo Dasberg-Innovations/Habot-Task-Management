@@ -254,7 +254,7 @@ const PersonalGoalsPage = () => {
         if (!window.confirm('Are you sure you want to delete this subgoal?')) return;
 
         try {
-            const response = await axios.delete(`https://tasmit-task-management-application-1.onrender.com/${goalId}/subgoals/${subGoalId}`);
+            const response = await axios.delete(`https://tasmit-task-management-application-1.onrender.com/goals/${goalId}/subgoals/${subGoalId}`);
             setGoals(goals.map(g => g._id === goalId ? response.data : g));
         } catch (error) {
             console.error('Error deleting subgoal:', error);

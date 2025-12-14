@@ -62,7 +62,7 @@ function Settings() {
     if (!user) return;
 
     try {
-      const response = await fetch(`https://tasmit-task-management-application.onrender.com/settings/${user.id}`);
+      const response = await fetch(`https://tasmit-task-management-application-1.onrender.com/settings/${user.id}`);
       if (response.ok) {
         const settings = await response.json();
         if (settings.theme) {
@@ -83,7 +83,7 @@ function Settings() {
 
     setLoading(true);
     try {
-      const response = await fetch('https://tasmit-task-management-application.onrender.com/settings', {
+      const response = await fetch('https://tasmit-task-management-application-1.onrender.com/settings', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

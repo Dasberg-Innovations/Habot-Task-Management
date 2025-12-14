@@ -209,7 +209,7 @@ const TaskManager = () => {
 
     const fetchTasks = async () => {
         try {
-            const response = await axios.get(`https://tasmit-task-management-application.onrender.com/tasks/user/${user.id}`);
+            const response = await axios.get(`https://tasmit-task-management-application-1.onrender.com/tasks/user/${user.id}`);
             setTasks(response.data);
         } catch (error) {
             console.error('Error fetching tasks:', error);
@@ -230,7 +230,7 @@ const TaskManager = () => {
                 ? new Date(newTask.due_date + 'T00:00:00').toISOString()
                 : new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString();
 
-            const response = await axios.post('https://tasmit-task-management-application.onrender.com/tasks', {
+            const response = await axios.post('https://tasmit-task-management-application-1.onrender.com/tasks', {
                 userId: user.id,
                 Task_Title: newTask.title,
                 Description: newTask.description,
@@ -253,7 +253,7 @@ const TaskManager = () => {
     const toggleTask = async (id) => {
         try {
             const task = tasks.find(t => t._id === id);
-            const response = await axios.put(`https://tasmit-task-management-application.onrender.com/tasks/${id}`, {
+            const response = await axios.put(`https://tasmit-task-management-application-1.onrender.com/tasks/${id}`, {
                 Task_Completed: !task.Task_Completed
             });
 
@@ -267,7 +267,7 @@ const TaskManager = () => {
         if (!window.confirm('Are you sure you want to delete this task?')) return;
 
         try {
-            await axios.delete(`https://tasmit-task-management-application.onrender.com/tasks/${id}`);
+            await axios.delete(`https://tasmit-task-management-application-1.onrender.com/tasks/${id}`);
             setTasks(tasks.filter(t => t._id !== id));
         } catch (error) {
             console.error('Error deleting task:', error);
@@ -297,7 +297,7 @@ const TaskManager = () => {
                 updateData.Due_Date = dueDateToSend;
             }
 
-            const response = await axios.put(`https://tasmit-task-management-application.onrender.com/tasks/${editTask.id}`, updateData);
+            const response = await axios.put(`https://tasmit-task-management-application-1.onrender.com/tasks/${editTask.id}`, updateData);
 
 
             setTasks(tasks.map(t => t._id === editTask.id ? response.data : t));
@@ -315,7 +315,7 @@ const TaskManager = () => {
         }
 
         try {
-            const response = await axios.post(`https://tasmit-task-management-application.onrender.com/tasks/${taskId}/subtasks`, {
+            const response = await axios.post(`https://tasmit-task-management-application-1.onrender.com/tasks/${taskId}/subtasks`, {
                 title: newSubTask.title
             });
 
@@ -329,7 +329,7 @@ const TaskManager = () => {
 
     const toggleSubTask = async (taskId, subTaskId, completed) => {
         try {
-            const response = await axios.put(`https://tasmit-task-management-application.onrender.com/tasks/${taskId}/subtasks/${subTaskId}`, {
+            const response = await axios.put(`https://tasmit-task-management-application-1.onrender.com/tasks/${taskId}/subtasks/${subTaskId}`, {
                 completed: !completed
             });
 
@@ -343,7 +343,7 @@ const TaskManager = () => {
         if (!window.confirm('Are you sure you want to delete this subtask?')) return;
 
         try {
-            const response = await axios.delete(`https://tasmit-task-management-application.onrender.com/tasks/${taskId}/subtasks/${subTaskId}`);
+            const response = await axios.delete(`https://tasmit-task-management-application-1.onrender.com/tasks/${taskId}/subtasks/${subTaskId}`);
             setTasks(tasks.map(t => t._id === taskId ? response.data : t));
         } catch (error) {
             console.error('Error deleting subtask:', error);

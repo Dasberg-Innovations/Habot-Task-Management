@@ -1,12 +1,20 @@
 import mongoose from 'mongoose';
 import express from 'express';
 import { User } from '../Models/UserLoginModel.js';
-import bcrypt from 'bcrypt'; // Encryption for Password
+import bcrypt from 'bcrypt'; 
 
 
 const router = express.Router();
 
 router.use(express.json());
+
+router.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'https://habotapp-task-manager.onrender.com');
+  res.header('Access-Control-Allow-Credentials', 'true');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  next();
+});
 
 router.post("/register", async (request, response) => {
     try {

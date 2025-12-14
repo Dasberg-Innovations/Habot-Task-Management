@@ -9,9 +9,10 @@ import SettingsRoute from './Routes/SettingsRoute.js';
 
 const app = express();
 
-app.use(cors());
-
-app.use(express.json());
+app.use(cors({
+  origin: ['https://habotapp-frontend.onrender.com', 'http://localhost:5173'], 
+  credentials: true
+}));
 
 
 app.get('/', (request, response) => {

@@ -17,8 +17,8 @@ export default function HeroPage() {
     try {
       setLoading(true);
       const [goalsRes, tasksRes] = await Promise.all([
-        axios.get(`https://tasmit-task-management-application.onrender.com/goals/user/${user.id}`),
-        axios.get(`https://tasmit-task-management-application.onrender.com/tasks/user/${user.id}`)
+        axios.get(`https://tasmit-task-management-application-1.onrender.com/goals/user/${user.id}`),
+        axios.get(`https://tasmit-task-management-application-1.onrender.com/tasks/user/${user.id}`)
       ]);
       setGoals(goalsRes.data);
       setTasks(tasksRes.data);

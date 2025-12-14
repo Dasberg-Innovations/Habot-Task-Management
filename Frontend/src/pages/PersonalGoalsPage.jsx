@@ -471,8 +471,8 @@ const PersonalGoalsPage = () => {
 
             <div className="flex flex-col space-y-4 w-full">
                 {goals.length === 0 ? (
-                    <div className="text-center text-gray-500 py-8 border-2 border-dashed border-gray-300 rounded-lg">
-                        <MdAdd className="mx-auto mb-3 text-gray-400" size={48} />
+                    <div className="text-center text-white py-8 border-2 border-dashed border-gray-300 rounded-lg">
+                        <MdAdd className="mx-auto mb-3 text-white" size={48} />
                         <p className="text-lg font-medium mb-2">No goals yet</p>
                         <p className="text-sm">Click the <span className="font-semibold">+</span> button above to add your first goal!</p>
                     </div>

@@ -543,7 +543,7 @@ const TaskManager = () => {
                                     </div>
                                 ))
                             ) : (
-                                <div className="text-center text-gray-400 py-4">No subtasks yet. Add your first subtask!</div>
+                                <div className="text-center text-white py-4">No subtasks yet. Add your first subtask!</div>
                             )}
                         </div>
                     </div>
@@ -578,8 +578,8 @@ const TaskManager = () => {
 
             <div className="flex flex-col space-y-4 w-full">
                 {tasks.length === 0 ? (
-                    <div className="text-center text-gray-500 py-8 border-2 border-dashed border-gray-300 rounded-lg">
-                        <MdAdd className="mx-auto mb-3 text-gray-400" size={48} />
+                    <div className="text-center text-white py-8 border-2 border-dashed border-gray-300 rounded-lg">
+                        <MdAdd className="mx-auto mb-3 text-white" size={48} />
                         <p className="text-lg font-medium mb-2">No tasks yet</p>
                         <p className="text-sm">Click the <span className="font-semibold">+</span> button above to add your first task!</p>
                     </div>

@@ -99,7 +99,7 @@ export default function HeroPage() {
         <div className="flex-1 goals-section bg-[#776472] backdrop-blur-md p-6 rounded-3xl border-amber-100">
           <h2 className="text-2xl font-bold mb-4 text-white">Your Goals Progress</h2>
           {!goals.length ? (
-            <div className="text-center text-slate-500 py-4">
+            <div className="text-center text-white py-4">
               Want to see your progress? Head to the Goals Tab and Create a Goal.
             </div>
           ) : (
@@ -145,7 +145,7 @@ export default function HeroPage() {
           </div>
 
           {!tasks.length ? (
-            <div className="text-center text-slate-500 py-4">
+            <div className="text-center text-white py-4">
               There are no tasks yet. Create some tasks to get started.
             </div>
           ) : (
